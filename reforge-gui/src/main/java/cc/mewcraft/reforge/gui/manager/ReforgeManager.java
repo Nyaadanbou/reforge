@@ -84,7 +84,7 @@ public class ReforgeManager {
         Map<String, Ingredient> ingredientMap = new HashMap<>();
 
         Collection<File> files;
-        PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:" + "*.yml");
+        PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:" + "**.yml");
         try (Stream<Path> stream = Files.walk(reforgeConfigDirectory)) {
             files = stream.filter(pathMatcher::matches).map(Path::toFile).toList();
         } catch (IOException e) {
