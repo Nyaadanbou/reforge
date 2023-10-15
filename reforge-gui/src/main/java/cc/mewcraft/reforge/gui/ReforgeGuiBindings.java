@@ -33,7 +33,6 @@ public class ReforgeGuiBindings extends AbstractModule {
         // Then configure binds
         bind(Plugin.class).toInstance(plugin);
         bind(HelperPlugin.class).toInstance(plugin);
-
         bind(Logger.class).toInstance(plugin.getSLF4JLogger());
 
         bind(Translations.class)
@@ -57,9 +56,8 @@ public class ReforgeGuiBindings extends AbstractModule {
 
         bind(FileConfiguration.class)
                 .annotatedWith(ReforgeMenuConfig.class)
-                .toProvider(() -> {
-                    Path path = plugin.getDataFolder().toPath().resolve("gui-config.yml");
-                    return YamlConfiguration.loadConfiguration(path.toFile());
-                }).in(Singleton.class);
+                .toProvider(() -> YamlConfiguration.loadConfiguration(
+                        plugin.getDataFolder().toPath().resolve("gui-config.yml").toFile()
+                )).in(Singleton.class);
     }
 }

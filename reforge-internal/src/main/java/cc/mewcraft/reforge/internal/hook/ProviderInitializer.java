@@ -35,7 +35,7 @@ public final class ProviderInitializer {
     public void initialize(String provider) {
         ProviderEnum match = ProviderEnum.match(provider);
 
-        if (plugin.isPluginPresent(match.plugin)) {
+        if (plugin.isPluginPresent(match.plugin) || (match == ProviderEnum.MOCK /* Allow to use "Mock" as a plugin name */)) {
             ReforgeProvider.register(injector.getInstance(match.clazz));
             logger.info("Registered reforge provider: {}", match.clazz.getSimpleName());
         } else {

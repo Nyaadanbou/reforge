@@ -98,7 +98,7 @@ public class ReforgeManager {
             for (final String consumer /* key of reforgeable item */ : yamlConfig.getKeys(false)) {
                 PluginItem<?> pi = PluginItemRegistry.INSTANCE.byReferenceOrNull(consumer);
                 if (pi == null) {
-                    logger.error("Unknown reforgeable item from key: {}, skipped", consumer);
+                    logger.warn("Unknown reforgeable item from key: {}, skipped", consumer);
                     continue;
                 }
                 List<String> rawValues = yamlConfig.getStringList(consumer);

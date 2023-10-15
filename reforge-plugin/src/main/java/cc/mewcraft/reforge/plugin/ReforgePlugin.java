@@ -9,12 +9,9 @@ import com.google.inject.Injector;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 
 public class ReforgePlugin extends ExtendedJavaPlugin {
-    private Injector injector;
-    private Commands commands;
-
     @Override protected void enable() {
         // Configure bindings
-        injector = Guice.createInjector(
+        Injector injector = Guice.createInjector(
                 new ReforgeInternalBindings(this),
                 new ReforgeGuiBindings(this)
         );
@@ -24,8 +21,7 @@ public class ReforgePlugin extends ExtendedJavaPlugin {
         bindModule(injector.getInstance(ReforgeGuiModule.class));
 
         // Initialize commands
-        commands = injector.getInstance(Commands.class);
-        commands.registerCommands();
+        injector.getInstance(ReforgeCommands.class).registerCommands();
     }
 
     @Override protected void disable() {

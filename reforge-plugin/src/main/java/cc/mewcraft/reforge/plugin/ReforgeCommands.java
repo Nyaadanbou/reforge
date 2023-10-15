@@ -11,16 +11,16 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class Commands {
+public class ReforgeCommands {
     private static final String ROOT_COMMAND = "reforge";
 
-    private final CommandRegistry<Plugin> registry;
+    private final CommandRegistry registry;
     private final Injector injector;
     private final Plugin plugin;
 
     @Inject
-    public Commands(
-            final CommandRegistry<Plugin> registry,
+    public ReforgeCommands(
+            final CommandRegistry registry,
             final Injector injector,
             final Plugin plugin
     ) {
@@ -31,7 +31,7 @@ public class Commands {
 
     public void registerCommands() {
         // Prepare commands
-        registry.prepareCommand(registry
+        registry.addCommand(registry
                 .commandBuilder(ROOT_COMMAND)
                 .literal("open")
                 .argument(PlayerArgument.optional("target"))
@@ -46,7 +46,7 @@ public class Commands {
                         menu.open(player);
                     }
                 }).build());
-        registry.prepareCommand(registry
+        registry.addCommand(registry
                 .commandBuilder(ROOT_COMMAND)
                 .literal("reload")
                 .permission("reforge.command.reload")
@@ -57,9 +57,5 @@ public class Commands {
 
         // Register commands
         registry.registerCommands();
-    }
-
-    public void deleteRootCommand() {
-        registry.deleteRootCommand(ROOT_COMMAND);
     }
 }

@@ -10,8 +10,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.slf4j.Logger;
 
-import java.nio.file.Path;
-
 import javax.inject.Singleton;
 
 public class ReforgeInternalBindings extends AbstractModule {
@@ -28,15 +26,16 @@ public class ReforgeInternalBindings extends AbstractModule {
         // Then configure binds
         bind(Plugin.class).toInstance(plugin);
         bind(HelperPlugin.class).toInstance(plugin);
-
         bind(Logger.class).toInstance(plugin.getSLF4JLogger());
+    }
 
-        bind(FileConfiguration.class)
-                .annotatedWith(ReforgeInternalConfig.class)
-                .toProvider(() -> {
-                    Path path = plugin.getDataFolder().toPath().resolve("internal-config.yml");
-                    return YamlConfiguration.loadConfiguration(path.toFile());
-                }).in(Singleton.class);
+    @Provides
+    @Singleton
+    @ReforgeInternalConfig
+    public FileConfiguration provideReforgeInternalConfig() {
+        return YamlConfiguration.loadConfiguration(
+                plugin.getDataFolder().toPath().resolve("internal-config.yml").toFile()
+        );
     }
 
     @Provides
