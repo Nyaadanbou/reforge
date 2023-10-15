@@ -3,6 +3,7 @@ package cc.mewcraft.reforge.internal.hook;
 import cc.mewcraft.reforge.internal.Reforge;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
@@ -18,7 +19,8 @@ public class MockReforge implements Reforge {
         ItemStack clone = item.clone();
         clone.editMeta(meta -> {
             Component oldName = meta.hasDisplayName() ? Objects.requireNonNull(meta.displayName()) : Component.translatable(clone.translationKey());
-            meta.displayName(oldName.append(Component.space()).append(Component.text("(Reforged)").color(NamedTextColor.RED)));
+            Component newName = oldName.append(Component.space()).append(Component.text("(Reforged)").color(NamedTextColor.RED)).decoration(TextDecoration.ITALIC, false);
+            meta.displayName(newName);
         });
         return Optional.of(clone);
     }
