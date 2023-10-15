@@ -49,20 +49,21 @@ public abstract class Ingredient {
             nextInChain.last = head;
             head = nextInChain;
         }
-        return head;
+        return first;
     }
 
     public static Ingredient chain(@NotNull LinkedList<Ingredient> list) {
-        Ingredient head = list.removeFirst();
+        Ingredient first = list.removeFirst();
+        Ingredient head = first;
         for (final Ingredient nextInChain : list) {
             head.next = nextInChain;
             nextInChain.last = head;
             head = nextInChain;
         }
-        return head;
+        return first;
     }
 
-    Ingredient(final @NotNull Translations translations) {
+    protected Ingredient(final @NotNull Translations translations) {
         this.translations = translations;
     }
 
