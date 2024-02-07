@@ -14,7 +14,6 @@ dependencies {
     compileOnly(project(":reforge:reforge-internal"))
 
     // internal
-    compileOnly(project(":spatula:guice"))
     compileOnly(project(":spatula:bukkit:gui"))
     compileOnly(project(":spatula:bukkit:command"))
     compileOnly(project(":spatula:bukkit:message"))

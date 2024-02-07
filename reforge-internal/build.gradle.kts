@@ -15,6 +15,5 @@ dependencies {
     compileOnly(libs.mythicmobs)
 
     // internal
-    compileOnly(project(":spatula:guice"))
     compileOnly(project(":spatula:bukkit:command"))
 }

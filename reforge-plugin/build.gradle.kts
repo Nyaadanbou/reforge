@@ -24,7 +24,6 @@ dependencies {
     // internal
     implementation(project(":reforge:reforge-gui"))
     implementation(project(":reforge:reforge-internal"))
-    implementation(project(":spatula:guice"))
     implementation(project(":spatula:bukkit:gui"))
     implementation(project(":spatula:bukkit:command"))
     implementation(project(":spatula:bukkit:message"))
